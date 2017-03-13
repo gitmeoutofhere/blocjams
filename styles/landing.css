@@ -32,7 +32,6 @@
  .point {
      position: relative;
      padding: 2rem;
-     width: 33.3%;
      text-align: center;
      opacity: 0;
      -webkit-transform: scaleX(0.9) translateY(3rem);
@@ -42,13 +41,14 @@
      -moz-transition: all 0.25 ease-in-out;
      transition: all 0.25 ease-in-out;
      -webkit-transition-delay:  0.2s;
+     -moz-transition-delay: 0.2s;
      transition-delay:  0.2s;
 }
          
  .point .point-title {
      font-size: 1.25rem;
  }
-}
+
  .ion-music-note,
  .ion-radio-waves,
  .ion-iphone {
