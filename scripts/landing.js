@@ -1,20 +1,16 @@
 /* jshint browser: true, devel: true */
 var pointsArray = document.getElementsByClassName('point');
 
+var revealPoint = function (point) {
+    point.style.opacity = 1;
+    point.style.transform = "scaleX(1) translateY(0)";
+    point.style.msTransform = "scaleX(1) translateY(0)";
+    point.style.WebkitTransform = "scaleX(1) translateY(0)";
+};
+
 var animatePoints = function (points) {
-    
-        var i,
-            revealPoint = function (index) {
-                points[index].style.opacity = 1;
-                points[index].style.transform = "scaleX(1) translateY(0)";
-                points[index].style.msTransform = "scaleX(1) translateY(0)";
-                points[index].style.WebkitTransform = "scaleX(1) translateY(0)";
-            };
-        
-        for (i = 0; i < points.length; i += 1) {
-            revealPoint(i);
-        }
-    };
+    forEach(points, revealPoint);
+};
 
 window.onload = function () {
     if (window.innerHeight > 950) {
@@ -26,5 +22,5 @@ window.onload = function () {
         if (document.documentElement.scrollTop || document.body.scrollTop >= scrollDistance) {
             animatePoints(pointsArray);
         }
-     });                            
+    });
 };
