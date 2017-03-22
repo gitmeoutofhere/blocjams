@@ -73,7 +73,7 @@ var setCurrentAlbum = function (album) {
  
      
         var i = 0;
-        for (i; i < album.songs.length; i ++) {
+        for (i; i < album.songs.length; i++) {
             albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
         }
     };
@@ -96,7 +96,7 @@ window.onload = function () {
     });
     
     var i = 0;
-    for (i; i < songRows.length; i ++) {
+    for (i; i < songRows.length; i++) {
         songRows[i].addEventListener('mouseleave', function (event) {
             this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
         });
