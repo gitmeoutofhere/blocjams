@@ -1,4 +1,6 @@
 /* jshint browser: true */
+/*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 4, maxerr: 50 */
+/*global define */
 
 var albumPicasso = {
         title: 'The Colors',
@@ -47,11 +49,11 @@ var albumPeabo = {
 
 var createSongRow = function (songNumber, songName, songLength) {
         var template =
-                '<tr class="album-view-song-item">'
-              + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
-              + '  <td class="song-item-title">' + songName + '</td>'
-              + '  <td class="song-item-duration">' + songLength + '</td>'
-              + '</tr>';
+                  '<tr class="album-view-song-item">'
+                + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
+                + '  <td class="song-item-title">' + songName + '</td>'
+                + '  <td class="song-item-duration">' + songLength + '</td>'
+                + '</tr>';
  
         return template;
     };
@@ -93,29 +95,35 @@ window.onload = function () {
     setCurrentAlbum(albumPicasso);
     
     var findParentByClassName = function (element, targetClass) {
-            if (element) {
-                var currentParent = element.parentElement;
-                while (currentParent.className !== targetClass && currentParent.className !== null) {
-                    currentParent = currentParent.parentElement;
+        var currentParent = element.parentElement;
+        if (element) {
+            while (currentParent.className !== targetClass && currentParent.className !== null) {
+                currentParent = currentParent.parentElement;
             }
-                    return currentParent;
-            }
-        };
+            return currentParent;
+        } else if (currentParent.className !== targetClass) {
+            console.log("No parent found with that class name.");
+        } else {
+            console.log("No parent found.");
+        }
+    };
+    
+
     var getSongItem = function (element) {
             switch (element.className) {
             case 'album-song-button':
             case 'ion-play':
             case 'ion-pause':
-                return findParentByClassName(element, 'song-item-number');
+                return findParentByClassName(element, '.song-item-number');
             case 'album-view-song-item':
                 return element.querySelector('.song-item-number');
             case 'song-item-title':
             case 'song-item-duration':
-                return findParentByClassName(element, 'album-view-song-item').querySelector('.song-item-number');
+                return findParentByClassName(element, '.album-view-song-item').querySelector('.song-item-number');
             case 'song-item-number':
                 return element;
-                default:
-                    return;
+            default:
+                return;
             }
         };
         
@@ -124,39 +132,50 @@ window.onload = function () {
             var songItem = getSongItem(targetElement);
             if (currentlyPlayingSong === null) {
                 songItem.innerHTML = pauseButtonTemplate;
-        currentlyPlayingSong = songItem.getAttribute('data-song-number');
-        } else if (currentlyPlayingSong ===
+                currentlyPlayingSong = songItem.getAttribute('data-song-number');
+            } else if (currentlyPlayingSong ===
                     songItem.getAttribute('data-song-number')) {
                 songItem.innerHTML = playButtonTemplate;
                 currentlyPlayingSong = null;
-        } else if (currentlyPlayingSong !== songItem.getAttribute('data-song-number')) {
+            } else if (currentlyPlayingSong !== songItem.getAttribute('data-song-number')) {
                 var currentlyPlayingSongElement = document.querySelector('[data-song-number="' + currentlyPlayingSong + '"]');
-         currentlyPlayingSongElement.innerHTML = currentlyPlayingSongElement.getAttribute('data-song-number');
-         songItem.innerHTML = pauseButtonTemplate;
-         currentlyPlayingSong = songItem.getAttribute('data-song-number');
-     }
+                currentlyPlayingSongElement.innerHTML = currentlyPlayingSongElement.getAttribute('data-song-number');
+                songItem.innerHTML = pauseButtonTemplate;
+                currentlyPlayingSong = songItem.getAttribute('data-song-number');
+            }
 
-};
+        };
         
     songListContainer.addEventListener('mouseover', function (event) {
         if (event.target.parentElement.className === 'album-view-song-item') {
             event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+            var songItem = getSongItem(event.target);
+            
+            if (songItem.getAttribute('data-song-item') !== currentlyPlayingSong) {
+                songItem.innerHTML = playButtonTemplate;
+            }
         }
     });
+    
     
     var i = 0;
     for (i; i < songRows.length; i++) {
         songRows[i].addEventListener('mouseleave', function (event) {
-            this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+            var songItem = getSongItem(event.target);
+            var songItemNumber = songItem.getAttribute('data-song-number');
+            if (songItemNumber !== currentlyPlayingSong) {
+                songItem.innerHTML = songItemNumber;
+            }
         });
-        songRows[i].addEventListener('click', function(event) {
-             clickHandler(event.target);
-         });
+        
+        songRows[i].addEventListener('click', function (event) {
+            clickHandler(event.target);
+        });
     }
      
     var albumArr = [albumMarconi, albumPeabo, albumPicasso];
     var index = 0;
-    albumImage.addEventListener("click", function (event) { 
+    albumImage.addEventListener("click", function (event) {
         setCurrentAlbum(albumArr[index]);
         index++;
         if (index === albumArr.length) {
@@ -165,4 +184,3 @@ window.onload = function () {
     });
      
 };
- 
