@@ -115,12 +115,12 @@ window.onload = function () {
             case 'ion-play':
             case 'ion-pause':
                 return findParentByClassName(element, '.song-item-number');
-            case 'album-view-song-item':
+            case '.album-view-song-item':
                 return element.querySelector('.song-item-number');
-            case 'song-item-title':
-            case 'song-item-duration':
+            case '.song-item-title':
+            case '.song-item-duration':
                 return findParentByClassName(element, '.album-view-song-item').querySelector('.song-item-number');
-            case 'song-item-number':
+            case '.song-item-number':
                 return element;
             default:
                 return;
