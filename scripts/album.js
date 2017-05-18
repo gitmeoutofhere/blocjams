@@ -51,6 +51,7 @@ var createSongRow = function (songNumber, songName, songLength) {
         if (songNumber !== currentlyPlayingSongNumber) {
             songNumberCell.html(songNumber);
         }
+        console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
     };
     
     $row.find('.song-item-number').click(clickHandler);
@@ -60,6 +61,8 @@ var createSongRow = function (songNumber, songName, songLength) {
     return $row;
     };
 
+
+   
 
 var setCurrentAlbum = function (album) {
     currentAlbum = album;
@@ -174,6 +177,10 @@ $(document).ready(function() {
      
     var albumArr = [albumMarconi, albumPeabo, albumPicasso];
     var index = 0;
+
+//adding albumImage var here again without jquery $ to fix bug
+var albumImage = ('.album-cover-art');
+
     albumImage.addEventListener("click", function (event) {
         setCurrentAlbum(albumArr[index]);
         index++;
@@ -181,5 +188,3 @@ $(document).ready(function() {
             index = 0;
         }
     });
-     
-};
