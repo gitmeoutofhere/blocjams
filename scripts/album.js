@@ -14,17 +14,17 @@ var createSongRow = function (songNumber, songName, songLength) {
         var $row = $(template);
     
      var clickHandler = function() {
-        var songNumber = $(this).attr('data-song-number');
+        var songNumber = parseInt($(this).attr('data-song-number'));
 
 	if (currentlyPlayingSongNumber !== null) {
 		// Revert to song number for currently playing song because user started playing new song.
 		var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
 		currentlyPlayingCell.html(currentlyPlayingSongNumber);
 	}
-	if (currentlyPlayingSongNumber !== songNumber) {
+	if (currentlyPlayingSongNumber !== parseInt(songNumber)) {
 		$(this).html(pauseButtonTemplate);
-		currentlyPlayingSongNumber = songNumber;
-        currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+		currentlyPlayingSongNumber = parseInt(songNumber);
+        currentSongFromAlbum = currentAlbum.songs[parseInt(songNumber) - 1];
         updatePlayerBarSong();
 	} else if (currentlyPlayingSongNumber === songNumber) {
 		$(this).html(playButtonTemplate);
@@ -37,18 +37,18 @@ var createSongRow = function (songNumber, songName, songLength) {
     
      var onHover = function(event) {
         var songNumberCell = $(this).find('.song-item-number');
-        var songNumber = songNumberCell.attr('data-song-number');
+        var songNumber = parseInt(songNumberCell.attr('data-song-number'));
 
-        if (songNumber !== currentlyPlayingSongNumber) {
+        if (songNumber !== parseInt(currentlyPlayingSongNumber)) {
             songNumberCell.html(playButtonTemplate);
         }
     };
 
     var offHover = function(event) {
         var songNumberCell = $(this).find('.song-item-number');
-        var songNumber = songNumberCell.attr('data-song-number');
+        var songNumber = parseInt(songNumberCell.attr('data-song-number'));
 
-        if (songNumber !== currentlyPlayingSongNumber) {
+        if (songNumber !== parseInt(currentlyPlayingSongNumber)) {
             songNumberCell.html(songNumber);
         }
         console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
@@ -179,12 +179,11 @@ $(document).ready(function() {
     var index = 0;
 
 //adding albumImage var here again without jquery $ to fix bug
-var albumImage = ('.album-cover-art');
 
-    albumImage.addEventListener("click", function (event) {
-        setCurrentAlbum(albumArr[index]);
-        index++;
-        if (index === albumArr.length) {
-            index = 0;
-        }
-    });
+   // albumImage.addEventListener("click", function (event) {
+     //   setCurrentAlbum(albumArr[index]);
+    //    index++;
+     //   if (index === albumArr.length) {
+     //       index = 0;
+    //    }
+   // });
