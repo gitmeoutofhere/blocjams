@@ -112,11 +112,7 @@ var nextSong = function() {
 
     var lastSongNumber = currentlyPlayingSongNumber;
 
-<<<<<<< HEAD
     setSong(songNumber);
-=======
-    setSong(songNumber)
->>>>>>> 90777b86d257ba7764684dd969970d331a284b5d
     //currentlyPlayingSongNumber = currentSongIndex + 1;
     //currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
 

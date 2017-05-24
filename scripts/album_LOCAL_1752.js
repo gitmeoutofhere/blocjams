@@ -12,7 +12,8 @@ var getSongNumberCell = function(number) {
 };
 
 var createSongRow = function (songNumber, songName, songLength) {
-        var template = '<tr class="album-view-song-item">'
+        var template =
+                  '<tr class="album-view-song-item">'
                 + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
                 + '  <td class="song-item-title">' + songName + '</td>'
                 + '  <td class="song-item-duration">' + songLength + '</td>'
@@ -112,11 +113,7 @@ var nextSong = function() {
 
     var lastSongNumber = currentlyPlayingSongNumber;
 
-<<<<<<< HEAD
-    setSong(songNumber);
-=======
     setSong(songNumber)
->>>>>>> 90777b86d257ba7764684dd969970d331a284b5d
     //currentlyPlayingSongNumber = currentSongIndex + 1;
     //currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
 
