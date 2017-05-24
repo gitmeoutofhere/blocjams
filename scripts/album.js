@@ -25,7 +25,7 @@ var createSongRow = function (songNumber, songName, songLength) {
         var songNumber = parseInt($(this).attr('data-song-number'));
 
 	if (currentlyPlayingSongNumber !== null) {
-		var currentlyPlayingCell = getSongNumberCell = (number);
+		var currentlyPlayingCell = getSongNumberCell(number);
 		//var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
 		currentlyPlayingCell.html(currentlyPlayingSongNumber);
 	}
