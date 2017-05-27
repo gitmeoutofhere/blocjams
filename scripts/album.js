@@ -23,7 +23,7 @@ var setVolume = function(volume) {
  };
 
 var getSongNumberCell = function(number) {
-  return = $('song-item-number" data-song-number="' + number + '"]');
+  return $('.song-item-number [data-song-number="' + number + '"]');
 };
 
 var createSongRow = function (songNumber, songName, songLength) {
