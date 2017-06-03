@@ -99,10 +99,10 @@ var createSongRow = function (songNumber, songName, songLength) {
 var setCurrentAlbum = function (album) {
     currentAlbum = album;
     var $albumTitle = $('.album-view-title');
-     var $albumArtist = $('.album-view-artist');
-     var $albumReleaseInfo = $('.album-view-release-info');
-     var $albumImage = $('.album-cover-art');
-     var $albumSongList = $('.album-view-song-list');
+    var $albumArtist = $('.album-view-artist');
+    var $albumReleaseInfo = $('.album-view-release-info');
+    var $albumImage = $('.album-cover-art');
+    var $albumSongList = $('.album-view-song-list');
 
      $albumTitle.text(album.title);
      $albumArtist.text(album.artist);
@@ -157,9 +157,7 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .song-name').text(currentSongFromAlbum.title);
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
-
-        
-  $('.main-controls .play-pause').html(playerBarPauseButton);       
+    $('.main-controls .play-pause').html(playerBarPauseButton);       
 
 };
  
@@ -190,12 +188,12 @@ var previousSong = function() {
 
 var togglePlayFromPlayerBar = function () {
     if (currentSongFromAlbum.isPaused){ 
-        $('.song-item-number').html(pauseButtonTemplate);  //track song index? songitemnumber is pulling all songs
+        $('.currentlyPlayingSongNumber').html(pauseButtonTemplate);  //track song index? songitemnumber is pulling all songs
         $('.main-controls .play-pause').html(playerBarPauseButton);
         currentSoundFile.play();
     } else if (currentSoundFile !== null) { 
-        $('.song-item-number').html(playButtonTemplate);
-        $('.main-controls .play-pause').html(playerBarPlayButton);
+        $('.currentlyPlaying .song-item-number').html(playButtonTemplate);
+        $('.currentlyPlayingSongNumber').html(playerBarPlayButton);
         currentSoundFile.pause();
     }
 };
