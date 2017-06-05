@@ -9,10 +9,11 @@ var setSong = function(songNumber) {
     
     currentlyPlayingSongNumber = parseInt(songNumber);
     currentSongFromAlbum = currentAlbum.songs[songNumber -1];
-         currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
+    currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
          formats: [ 'mp3' ],
          preload: true
      });
+    
     setVolume(currentVolume);
 };
 
@@ -40,17 +41,15 @@ var createSongRow = function (songNumber, songName, songLength) {
 
 	if (currentlyPlayingSongNumber !== null) {
 		var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
-		//var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+		
         currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
 		currentlyPlayingCell.html(currentlyPlayingSongNumber);
 	}
          
-        currentSongFromAlbum = currentAlbum.songs[parseInt(songNumber) - 1];
 	if (currentlyPlayingSongNumber !== parseInt(songNumber)) {
 		setSong(songNumber);
         currentSoundFile.play();
         $(this).html(pauseButtonTemplate);
-        //replaced with setSong currentlyPlayingSongNumber = parseInt(songNumber);
         currentSongFromAlbum = currentAlbum.songs[parseInt(songNumber) - 1];
         updatePlayerBarSong();
 	} else if (currentlyPlayingSongNumber === songNumber) {
@@ -188,7 +187,7 @@ var previousSong = function() {
 
 var togglePlayFromPlayerBar = function () {
     if (currentSongFromAlbum.isPaused){ 
-        $('.currentlyPlayingSongNumber').html(pauseButtonTemplate);  //track song index? songitemnumber is pulling all songs
+        $('.currentlyPlayingSongNumber').html(pauseButtonTemplate); 
         $('.main-controls .play-pause').html(playerBarPauseButton);
         currentSoundFile.play();
     } else if (currentSoundFile !== null) { 
@@ -205,7 +204,6 @@ var playerBarPauseButton = '<span class="ion-pause"></span>';
 
 
 var currentAlbum = null;
-
 var currentlyPlayingSongNumber = null;
 var currentSongFromAlbum = null;
 var currentSoundFile = null;
