@@ -276,13 +276,15 @@ var togglePlayFromPlayerBar = function () {
     }
 };
 
-var setCurrentTimeInPlayerBar = function(filterTimeCode, currentTime) {
+var setCurrentTimeInPlayerBar = function(currentTime) {
+    filterTimeCode(currentTime);
     var playTime = currentSoundFile.getTime();
     $('.current-time').text(playTime);   
 };
 
 
-var setTotalTimeInPlayerBar = function(filterTimeCode, totalTime) {
+var setTotalTimeInPlayerBar = function(totalTime) {
+    filterTimeCode(totalTime);
     var duration = currentSoundFile.getDuration();
    $('.total-time').text(duration);
 
@@ -291,10 +293,14 @@ var setTotalTimeInPlayerBar = function(filterTimeCode, totalTime) {
 var filterTimeCode = function(timeInSeconds){
     var songTime = parseFloat(timeInSeconds);
     var timeSeconds = Math.floor(songTime);
-    var timeMinutes = timeSeconds / 60;
-    var remainingSeconds = timeMinutes % timeSeconds;
-        
-    return Math.floor(timeMinutes) + ":" + remainingSeconds;
+    var timeMinutes = Math.floor(timeSeconds / 60);
+    var remainingSeconds = timeSeconds % 60;
+    var addZeroForSeconds = 0;
+    if (remainingSeconds < 10){
+        remainingSeconds = addZeroForSeconds + remainingSeconds;
+    }
+    
+    return timeMinutes + ":" + remainingSeconds;
 };
 
 
